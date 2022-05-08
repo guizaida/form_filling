@@ -20,7 +20,7 @@ options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=options)
 driver.get (url)
 locator=(By.XPATH,'//*[@id="i0116"]')
-WebDriverWait(driver,30,1).until(EC.presence_of_element_located(locator))#
+WebDriverWait(driver,30,1).until(EC.presence_of_element_located(locator))#等待葉面載入完成
 driver.find_element(By.XPATH,'//*[@id="i0116"]').send_keys(acc)
 time.sleep(3)
 driver.find_element(By.XPATH,'//*[@id="idSIButton9"]').click()
@@ -88,8 +88,8 @@ elif sys.argv[1] == 'night':#晚上下班前
     if status != True:
         time.sleep(3)
         #提醒一下~ 需要填Time sheet 的同仁，前一次的是否已經填寫了呢?
-        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[2]/div/div[1]/div/label/input').click()#是
-        driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[2]/div/div[2]/div/label/input').click()#否
+        driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[2]/div/div[1]/div/label/input').click()#是
+        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[2]/div/div[2]/div/label/input').click()#否
         time.sleep(3)
         #在近兩周內是否有與確診者或是被匡列人士接觸?
         # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[1]/div/label/input').click()#是
@@ -148,15 +148,15 @@ elif sys.argv[1] == 'monday':#假日後上班(週一早上請選此項)
     if status:
         #提醒一下~ 需要填Time sheet 的同仁，前一次的是否已經填寫了呢?
         driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[1]/div/label/input').click()#是
-        driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[2]/div/label/input').click()#否
-        driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[3]/div/label/input').click()#免填
+        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[2]/div/label/input').click()#否
+        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[3]/div/label/input').click()#免填
         time.sleep(3)
         #在近兩周內是否有與發燒或是身體不適患者接觸?
         # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[2]/div/div[1]/div/label/input').click()#是
         driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[2]/div/div[2]/div/label/input').click()#否
         time.sleep(3)
         #請確認，台灣社交距離APP上檢視是否有與確診者的接觸距離?
-        driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[8]/div/div[2]/div/div[1]/div/label/input').click()#是
+        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[8]/div/div[2]/div/div[1]/div/label/input').click()#是
         driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[8]/div/div[2]/div/div[2]/div/label/input').click()#否
         time.sleep(3)
         driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()#提交
