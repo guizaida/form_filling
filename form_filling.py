@@ -66,7 +66,7 @@ if sys.argv[1] == 'morning':#早上上班前填寫
         # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[2]/div/div[1]/div/label/input').click()#是
         driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[2]/div/div[2]/div/label/input').click()#否
         time.sleep(3)
-        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()#提交
+        driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()#提交
         time.sleep(3)
 
 
