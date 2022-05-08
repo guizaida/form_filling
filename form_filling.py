@@ -20,7 +20,7 @@ options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=options)
 driver.get (url)
 locator=(By.XPATH,'//*[@id="i0116"]')
-WebDriverWait(driver,30,1).until(EC.presence_of_element_located(locator))#等待葉面載入完成
+WebDriverWait(driver,30,1).until(EC.presence_of_element_located(locator))#等待頁面載入完成
 driver.find_element(By.XPATH,'//*[@id="i0116"]').send_keys(acc)
 time.sleep(3)
 driver.find_element(By.XPATH,'//*[@id="idSIButton9"]').click()
