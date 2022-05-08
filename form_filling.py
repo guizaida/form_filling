@@ -12,7 +12,7 @@ inifile = cp.ConfigParser()
 inifile.read(filename,'UTF-8')
 acc = inifile.get('Microsoft','acc')
 password = inifile.get('Microsoft','pwd')
-url = 'https://forms.office.com/pages/responsepage.aspx?id=jEDbJMinOk-P-RCGCkjSNfK_5HUi3ylNtnMcsso5a2NUNjBOTktaV1FJVjhGSUVFRUJMUzFJRFRBVS4u&web=1&wdLOR=c3B762FFE-33D0-4BE6-9CE9-F386098FC0AD'
+url = inifile.get('Microsoft','url')
 options = Options()#瀏覽器設定
 options.add_argument('--no-sandbox')
 options.add_argument("--incognito")#無痕模式
@@ -81,9 +81,9 @@ elif sys.argv[1] == 'night':#晚上下班前
     #今晚預計移動地點?
     driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[1]/div/label/input').click()#在家休息無外出
     # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[2]/div/label/input').click()#直接回家不繞路 (Go home directly)
+    #如果選擇需要前往人潮聚集地 或者 前往醫療院所則需要打開此選項
     # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[3]/div/label/input').click()#需要前往人潮聚集地(如風景區、遊樂園、夜市、遶境...等)
     # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[4]/div/label/input').click()#前往醫療院所(如診所、醫院、衛生中心...等)
-    #如果選擇需要前往人潮聚集地 或者 前往醫療院所則需要打開此選項
     #status = True
     if status != True:
         time.sleep(3)
