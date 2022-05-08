@@ -21,22 +21,17 @@ python form_filling.py morning wfm
 python form_filling.py morning holiday
 ```
 
-4.晚上下班 進辦公室
-```
-python form_filling.py night office
-```
-
-5.晚上下班 
+4.晚上下班 
 ```
 python form_filling.py night 
 ```
 
-6.假日後上班進辦公室
+5.假日後上班進辦公室
 ```
 python form_filling.py monday office 
 ```
 
-7.假日後上班 WFH
+6.假日後上班 WFH
 ```
 python form_filling.py monday wfm 
 ```
