@@ -7,49 +7,14 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 import sys
 import configparser as cp
-filename = './config.ini'
-inifile = cp.ConfigParser()
-inifile.read(filename, 'UTF-8')
-acc = inifile.get('Microsoft', 'acc')
-password = inifile.get('Microsoft', 'pwd')
-url = inifile.get('Microsoft', 'url')
+import os
 
-options = Options()  # 瀏覽器設定
-options.add_experimental_option("detach", True)
-options.add_argument('--no-sandbox')
-options.add_argument("--incognito")  # 無痕模式
 
-driver = webdriver.Chrome(
-    ChromeDriverManager().install(), chrome_options=options)
-driver.get(url)
-locator = (By.XPATH, '//*[@id="i0116"]')
-WebDriverWait(driver, 30, 1).until(
-    EC.presence_of_element_located(locator))  # 等待頁面載入完成
-driver.find_element(By.XPATH, '//*[@id="i0116"]').send_keys(acc)
-time.sleep(3)
-driver.find_element(By.XPATH, '//*[@id="idSIButton9"]').click()
-time.sleep(3)
-driver.find_element(By.XPATH, '//*[@id="i0118"]').send_keys(password)
-time.sleep(3)
-driver.find_element(By.XPATH, '//*[@id="idSIButton9"]').click()
-time.sleep(3)
-driver.find_element(By.XPATH, '//*[@id="idBtn_Back"]').click()
-time.sleep(3)
-# 今日身體狀況 ?(How is your health status today?)
-locator = (
-    By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div/label/input')
-WebDriverWait(driver, 60, 1).until(
-    EC.presence_of_element_located(locator))  # 等待頁面載入完成
-driver.find_element(
-    By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div/label/input').send_keys(acc)
-driver.find_element(
-    By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div/label/input').click()  # 正常(Normal)
-# driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[2]/div/label/input').click()#其他
-# health_status ='請輸入身體狀況'
-# driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[2]/div/label/div/div/input').sendkey(health_status)#其他
-time.sleep(3)
+
+
 # 本次填寫時段
-if sys.argv[1] == 'morning':  # 早上上班前填寫
+
+def morning(driver):
     driver.find_element(
         By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div/label/input').click()
     time.sleep(3)
@@ -94,7 +59,7 @@ if sys.argv[1] == 'morning':  # 早上上班前填寫
 # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[3]/div/label/input').click()#出差(Business Trip)
 #################################################################################################################################################################################
 
-elif sys.argv[1] == 'night':  # 晚上下班前
+def night(driver):
     driver.find_element(
         By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[3]/div/div[2]/div/div[2]/div/label/input').click()  # 晚上下班前填寫
     time.sleep(3)
@@ -150,7 +115,7 @@ elif sys.argv[1] == 'night':  # 晚上下班前
     time.sleep(3)
 
 # 假日後上班
-elif sys.argv[1] == 'monday':  # 假日後上班(週一早上請選此項)
+def monday(driver):
     driver.find_element(
         By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[3]/div/div[2]/div/div[3]/div/label/input').click()
     time.sleep(3)
@@ -193,4 +158,58 @@ elif sys.argv[1] == 'monday':  # 假日後上班(週一早上請選此項)
         driver.find_element(
             By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()  # 提交
         time.sleep(3)
-driver.quit()
+        
+if __name__ == '__main__':
+    inifile = cp.ConfigParser()
+    inifile.read( './config.ini', 'UTF-8')
+    acc = inifile.get('Microsoft', 'acc')
+    password = inifile.get('Microsoft', 'pwd')
+    url = inifile.get('Microsoft', 'url')
+    options = Options()  # 瀏覽器設定
+    # options.add_experimental_option("detach", True)
+    options.add_argument('--no-sandbox')
+    options.add_argument("--incognito")  # 無痕模式
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(), chrome_options=options)
+    driver.get(url)
+    locator = (By.XPATH, '//*[@id="i0116"]')
+    WebDriverWait(driver, 30, 1).until(
+        EC.presence_of_element_located(locator))  # 等待頁面載入完成
+    driver.find_element(By.XPATH, '//*[@id="i0116"]').send_keys(acc)
+    time.sleep(3)
+    driver.find_element(By.XPATH, '//*[@id="idSIButton9"]').click()
+    time.sleep(3)
+    driver.find_element(By.XPATH, '//*[@id="i0118"]').send_keys(password)
+    time.sleep(3)
+    driver.find_element(By.XPATH, '//*[@id="idSIButton9"]').click()
+    time.sleep(3)
+    driver.find_element(By.XPATH, '//*[@id="idBtn_Back"]').click()
+    time.sleep(3)
+    # 今日身體狀況 ?(How is your health status today?)
+    locator = (
+        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div/label/input')
+    WebDriverWait(driver, 60, 1).until(
+        EC.presence_of_element_located(locator))  # 等待頁面載入完成
+    driver.find_element(
+        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div/label/input').send_keys(acc)
+    driver.find_element(
+        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div/label/input').click()  # 正常(Normal)
+    # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[2]/div/label/input').click()#其他
+    # health_status ='請輸入身體狀況'
+    # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[2]/div/label/div/div/input').sendkey(health_status)#其他
+    time.sleep(3)
+    try:
+        if sys.argv[1] == 'morning':  # 早上上班前填寫
+            morning(driver)
+        elif sys.argv[1] == 'night':  # 晚上下班前
+            night(driver)
+        elif sys.argv[1] == 'monday':  # 假日後上班(週一早上請選此項)
+            monday(driver)
+    except Exception as e:
+        print('Hit Error:')
+        print(e)
+        os.system('pause')
+    finally:
+        os.system('pause')
+        driver.quit()
+    
