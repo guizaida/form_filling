@@ -15,40 +15,40 @@ import os
 # 本次填寫時段
 
 def morning(driver):
-    driver.find_element(
-        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div/label/input').click()
+    # driver.find_element(
+    #     By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div/label/input').click()
     time.sleep(3)
     # 今日的工作地點
     if sys.argv[2] == 'office':  # ECV辦公室(ECV Office)
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[1]/div/label/input').click()
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[3]/div/div[1]/div/label/input').click()
         status = True
     elif sys.argv[2] == 'wfh':  # 在家工作(WFH)
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[2]/div/label/input').click()
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[3]/div/div[2]/div/label/input').click()
         status = True
     elif sys.argv[2] == 'holiday':  # 排定休假，含事、病、防疫隔離假等
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[4]/div/label/input').click()
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[3]/div/div[4]/div/label/input').click()
         status = True
     time.sleep(3)
     if status:
         # 提醒一下~ 需要填Time sheet 的同仁，前一次的是否已經填寫了呢?
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[2]/div/div[1]/div/label/input').click()  # 是
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[3]/div/div[1]/div/label/input').click()  # 是
         # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[2]/div/div[2]/div/label/input').click()#否
         # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[2]/div/div[3]/div/label/input').click()#免填
         time.sleep(3)
         # 在近兩周內是否有與確診者或是被匡列人士接觸?
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[2]/div/label/input').click()  # 否
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[3]/div/div[2]/div/label/input').click()  # 否
         time.sleep(3)
         # 在近兩周內是否有與發燒或是身體不適患者接觸?
         # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[2]/div/div[1]/div/label/input').click()#是
         # driver.find_element(
         #     By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[2]/div/div[1]/div/label/input').click()  # 是
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[2]/div/div[2]/div/label/input').click()  # 否
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[3]/div/div[2]/div/label/input').click()  # 否
         time.sleep(3)
         driver.find_element(
             By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()  # 提交
@@ -61,13 +61,16 @@ def morning(driver):
 
 def night(driver):
     driver.find_element(
-        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[3]/div/div[2]/div/div[2]/div/label/input').click()  # 晚上下班前填寫
+        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[3]/div/div[3]/div/div[2]/div/label/input').click()  # 晚上下班前填寫
     time.sleep(3)
     status = False
     # 今晚預計移動地點?
-    driver.find_element(
-        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[1]/div/label/input').click()  # 在家休息無外出
-    # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[2]/div/label/input').click()#直接回家不繞路 (Go home directly)
+    if sys.argv[2] == 'wfh':
+        driver.find_element(
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[3]/div/div[1]/div/label/input').click()  # 在家休息無外出
+    elif sys.argv[2] == 'office':
+        
+        driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[3]/div/div[2]/div/label/input').click()#直接回家不繞路 (Go home directly)
     # 如果選擇需要前往人潮聚集地 或者 前往醫療院所則需要打開此選項
     # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[3]/div/label/input').click()#需要前往人潮聚集地(如風景區、遊樂園、夜市、遶境...等)
     # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[4]/div/label/input').click()#前往醫療院所(如診所、醫院、衛生中心...等)
@@ -76,17 +79,17 @@ def night(driver):
         time.sleep(3)
         # 提醒一下~ 需要填Time sheet 的同仁，前一次的是否已經填寫了呢?
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[2]/div/div[1]/div/label/input').click()  # 是
-        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[2]/div/div[2]/div/label/input').click()#否
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[3]/div/div[1]/div/label/input').click()  # 是
+        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[3]/div/div[2]/div/label/input').click()#否
         time.sleep(3)
         # 在近兩周內是否有與確診者或是被匡列人士接觸?
-        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[1]/div/label/input').click()#是
+        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[3]/div/div[1]/div/label/input').click()#是
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[2]/div/label/input').click()  # 否
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[3]/div/div[2]/div/label/input').click()  # 否
         # 在近兩周內是否有與發燒或是身體不適患者接觸?
-        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[2]/div/div[1]/div/label/input').click()#是
+        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[3]/div/div[1]/div/label/input').click()#是
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[2]/div/div[2]/div/label/input').click()  # 否
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[3]/div/div[2]/div/label/input').click()  # 否
         time.sleep(3)
     else:
         # 我預計前往的地點
@@ -97,7 +100,7 @@ def night(driver):
         # 提醒一下~ 需要填Time sheet 的同仁，今日是否填寫了呢?
         driver.find_element(
             By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[1]/div/label/input').click()  # 是
-        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[2]/div/label/input').click()#否
+        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[3]/div/div[2]/div/label/input').click()#否
         # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[3]/div/label/input').click()#免填
         time.sleep(3)
         # 在近兩周內是否有與確診者或是被匡列人士接觸?
@@ -110,53 +113,53 @@ def night(driver):
         driver.find_element(
             By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[8]/div/div[2]/div/div[2]/div/label/input').click()  # 否
         time.sleep(3)
-    driver.find_element(
-        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()  # 提交
+    # driver.find_element(
+        # By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()  # 提交
     time.sleep(3)
 
 # 假日後上班
 def monday(driver):
     driver.find_element(
-        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[3]/div/div[2]/div/div[3]/div/label/input').click()
+        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[3]/div/div[3]/div/div[3]/div/label/input').click()
     time.sleep(3)
     # 假日期間活動地點?
     driver.find_element(
-        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[2]/div/div[1]/div/label/input').click()  # 在家休息無外出
+        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[4]/div/div[3]/div/div[1]/div/label/input').click()  # 在家休息無外出
     time.sleep(3)
     # 今日的工作地點?
     if sys.argv[2] == 'office':  # ECV辦公室
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[2]/div/div[1]/div/label/input').click()
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[3]/div/div[1]/div/label/input').click()
         status = True
         time.sleep(3)
     elif sys.argv[2] == 'wfh':  # WFH
         # 今日的工作地點?在家工作(WFH)
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[2]/div/div[2]/div/label/input').click()
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[3]/div/div[2]/div/label/input').click()
         time.sleep(3)
         status = True
     elif sys.argv[2] == 'holiday':  # 排定休假，含事、病、防疫隔離假等
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[2]/div/div[4]/div/label/input').click()
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[5]/div/div[3]/div/div[3]/div/label/input').click()
         status = True
     if status:
         # 提醒一下~ 需要填Time sheet 的同仁，前一次的是否已經填寫了呢?
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[1]/div/label/input').click()  # 是
-        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[2]/div/label/input').click()#否
-        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[2]/div/div[3]/div/label/input').click()#免填
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[3]/div/div[1]/div/label/input').click()  # 是
+        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[3]/div/div[2]/div/label/input').click()#否
+        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[6]/div/div[3]/div/div[3]/div/label').click()#免填
         time.sleep(3)
         # 在近兩周內是否有與確診者或是被匡列人士接觸?
-        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[2]/div/div[1]/div/label/input').click()#是
+        # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[3]/div/div[1]/div/label/input').click()#是
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[2]/div/div[2]/div/label/input').click()  # 否
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[7]/div/div[3]/div/div[2]/div/label/input').click()  # 否
         time.sleep(3)
         # 在近兩周內是否有與發燒或是身體不適患者接觸?
         driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[8]/div/div[2]/div/div[2]/div/label/input').click()  # 否
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[8]/div/div[3]/div/div[2]/div/label/input').click()  # 否
         time.sleep(3)
-        driver.find_element(
-            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()  # 提交
+        # driver.find_element(
+        #     By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()  # 提交
         time.sleep(3)
         
 if __name__ == '__main__':
@@ -187,17 +190,18 @@ if __name__ == '__main__':
     time.sleep(3)
     # 今日身體狀況 ?(How is your health status today?)
     locator = (
-        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div/label/input')
+        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[3]/div/div[1]/div/label/input')
     WebDriverWait(driver, 60, 1).until(
         EC.presence_of_element_located(locator))  # 等待頁面載入完成
     driver.find_element(
-        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div/label/input').send_keys(acc)
+        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[3]/div/div[1]/div/label/input').click()  
+                    
     driver.find_element(
-        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div/label/input').click()  # 正常(Normal)
+        By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[3]/div/div[3]/div/div[1]/div/label/input').click()  # 正常(Normal)
     # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[2]/div/label/input').click()#其他
     # health_status ='請輸入身體狀況'
     # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[2]/div/label/div/div/input').sendkey(health_status)#其他
-    time.sleep(3)
+    # time.sleep(3)
     try:
         if sys.argv[1] == 'morning':  # 早上上班前填寫
             morning(driver)
@@ -208,8 +212,7 @@ if __name__ == '__main__':
     except Exception as e:
         print('Hit Error:')
         print(e)
-        os.system('pause')
-    finally:
-        os.system('pause')
-        driver.quit()
+    # finally:
+        # time.sleep(10)
+        # driver.quit()
     
