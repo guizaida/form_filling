@@ -53,6 +53,7 @@ def morning(driver):
         driver.find_element(
             By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()  # 提交
         time.sleep(3)
+    return True
 
 
 #################################################################################################################################################################################
@@ -114,8 +115,9 @@ def night(driver):
             By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[8]/div/div[2]/div/div[2]/div/label/input').click()  # 否
         time.sleep(3)
     # driver.find_element(
-        # By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()  # 提交
+    #     By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()  # 提交
     time.sleep(3)
+    return True
 
 # 假日後上班
 def monday(driver):
@@ -158,9 +160,10 @@ def monday(driver):
         driver.find_element(
             By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[8]/div/div[3]/div/div[2]/div/label/input').click()  # 否
         time.sleep(3)
-        # driver.find_element(
-        #     By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()  # 提交
+        driver.find_element(
+            By.XPATH, '//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[4]/div[1]/button/div').click()  # 提交
         time.sleep(3)
+        return True
         
 if __name__ == '__main__':
     inifile = cp.ConfigParser()
@@ -202,13 +205,15 @@ if __name__ == '__main__':
     # health_status ='請輸入身體狀況'
     # driver.find_element(By.XPATH,'//*[@id="form-container"]/div/div/div[1]/div/div[1]/div[3]/div[2]/div[2]/div/div[2]/div/div[2]/div/label/div/div/input').sendkey(health_status)#其他
     # time.sleep(3)
+    status = False
     try:
         if sys.argv[1] == 'morning':  # 早上上班前填寫
-            morning(driver)
+            status = morning(driver)
         elif sys.argv[1] == 'night':  # 晚上下班前
-            night(driver)
+            status = night(driver)
         elif sys.argv[1] == 'monday':  # 假日後上班(週一早上請選此項)
-            monday(driver)
+            status = monday(driver)
+        assert status == True
     except Exception as e:
         print('Hit Error:')
         print(e)
